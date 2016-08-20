@@ -56,13 +56,18 @@ function *execute() {
   console.log(arr);
   var command = {};
 
-  if(os === 'win32'){
-    command = spawn('cmd.exe',['\s', '\c',c,'D:']);
-  }else{
-    command = spawn(c,arr);
-  }
+  try{
+    if(os === 'win32'){
+      command = spawn('cmd.exe',['\s', '\c',c,'D:']);
+    }else{
+      command = spawn(c,arr);
+    }
+    this.body = yield runCommand(command);
+  }catch(function(e){
+    this.body = e;
+  })
 
-  this.body = yield runCommand(command);
+
 
 }
 
