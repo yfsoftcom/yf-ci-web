@@ -69,6 +69,9 @@ function *execute() {
 }
 
 process.on('uncaughtException',function (req, res, route, e) {
+  console.log(req);
+  console.log(res);
+  console.log(route);
   console.log(e);
 });
 
