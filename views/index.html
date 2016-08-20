@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CI Web Console App</title>
+    <meta charset="UTF-8"/>
+    <link href="//cdn.bootcss.com/flat-ui/2.3.0/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      #container {
+        width:780px;
+        margin:50px auto;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+
+      a {
+      color: #00B7FF;
+      }
+    </style>
+  </head>
+  <body ng-app="ci-app">
+    <div id="container">
+      <h1>CI Web Console App</h1>
+      <div class="panel panel-default" ng-controller="ciCtrl">
+        <div class="panel-heading">
+          <i class="fa fa-list"></i> Commands
+        </div>
+        <div class="panel-body">
+          <div class="form-horizontal">
+            <div class="form-group">
+                <label for="event-job" class="col-sm-2 control-label">Command</label>
+                <div class="col-sm-10">
+                    <textarea name="commmand" class="form-control" id="commmand-text" placeholder="ex: yfci build" ng-model="command.text"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary" ng-click="execute()">Execute</button>
+                </div>
+            </div>
+          </div>
+
+          <div ng-if="result.content" class="alert alert-success" role="alert">
+            {{result.content}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="//cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
+    <script>
+      var ciApp = angular.module('ci-app',[]);
+      ciApp.controller('ciCtrl',function($scope,$http){
+        $scope.result = {};
+        $scope.execute = function(){
+          if(!$scope.command){
+            alert('You Need Enter The Command To Execute~');
+            return false;
+          }
+          if(!confirm('Are you sure execute command:\r\n[ ' + $scope.command.text + " ]\r\n?"))
+            return false;
+
+          $http.post('/execute',{command:$scope.command.text}).then(function(data){
+            console.log(data);
+          }).catch(function(err){
+            console.log(err);
+            alert(err);
+          })
+        };
+        //alert('ok');
+      });
+
+    </script>
+  </body>
+</html>
