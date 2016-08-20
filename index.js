@@ -28,19 +28,19 @@ function *runCommand(command){
   // 捕获标准输出并将其打印到控制台
   return command.stdout.on('data', function (data) {
       console.log('标准输出：\n' + data);
-      return 2;
+      return data;
   });
 
   // 捕获标准错误输出并将其打印到控制台
   return command.stderr.on('data', function (data) {
       console.log('标准错误输出：\n' + data);
-      return 3;
+      return data;
   });
 
   // 注册子进程关闭事件
   return command.on('exit', function (code, signal) {
       console.log('子进程已退出，代码：' + code);
-      return 1;
+      return code;
   });
   //this.body = {status:0};
 }
@@ -52,10 +52,7 @@ function *execute() {
   var arr = commandText.split(' ');
   var c = arr[0];
   arr.splice(0,1);
-  console.log(c);
-  console.log(arr);
   var command = {};
-
   try{
     if(os === 'win32'){
       command = spawn('cmd.exe',['\s', '\c',c,'D:']);
