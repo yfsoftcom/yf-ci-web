@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label for="event-job" class="col-sm-2 control-label">Command</label>
                 <div class="col-sm-10">
-                    <textarea name="commmand" class="form-control" id="commmand-text" placeholder="ex: yfci build" ng-model="command.text"></textarea>
+                    <textarea name="commmand" rows="3" class="form-control" id="commmand-text" placeholder="ex: yfci build" ng-model="command.text"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -42,6 +42,9 @@
 
           <div ng-if="result.content" class="alert alert-success" role="alert">
             {{result.content}}
+          </div>
+          <div ng-if="result.error" class="alert alert-error" role="alert">
+            {{result.error}}
           </div>
         </div>
       </div>
@@ -61,10 +64,14 @@
             return false;
 
           $http.post('/execute',{command:$scope.command.text}).then(function(data){
-            console.log(data);
+            if(data.status == 200){
+                $scope.result.content = data.data;
+            }else{
+              $scope.result.error = data.statusText;
+            }
+
           }).catch(function(err){
-            console.log(err);
-            alert(err);
+            $scope.result.error = err;
           })
         };
         //alert('ok');
