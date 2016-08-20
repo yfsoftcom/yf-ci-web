@@ -30,63 +30,40 @@
             <div class="form-group">
                 <label for="event-job" class="col-sm-2 control-label">Command</label>
                 <div class="col-sm-10">
-                    <textarea name="commmand" rows="3" class="form-control" id="commmand-text" placeholder="ex: yfci build" ng-model="command.text"></textarea>
+                    <textarea name="commmand" rows="3" class="form-control" id="command-text" placeholder="ex: yfci build"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-primary" ng-click="execute()">Execute</button>
+                    <button class="btn btn-primary" id="command-execute">Execute</button>
                 </div>
             </div>
           </div>
 
-          <div ng-if="result.content" class="alert alert-success" role="alert" id="result">
-            {{result.content}}
-          </div>
-          <div ng-if="result.error" class="alert alert-error" role="alert">
-            {{result.error}}
-          </div>
+          <div class="alert alert-success hide" role="alert" id="result"></div>
+          <div class="alert alert-error hide" role="alert" id="error"></div>
         </div>
       </div>
     </div>
     <script src="//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script>
-      var ciApp = angular.module('ci-app',[]);
-      ciApp.controller('ciCtrl',function($scope,$http){
-        $scope.result = {};
-        $scope.execute = function(){
-          if(!$scope.command){
-            alert('You Need Enter The Command To Execute~');
-            return false;
-          }
-          if(!confirm('Are you sure execute command:\r\n[ ' + $scope.command.text + " ]\r\n?"))
-            return false;
-
-
-          $http.post('/execute',{command:$scope.command.text}).then(function(data){
-            console.log(data);
-            if(data.status == 200){
-              if(data.data != ''){
-                $scope.result.content = data.data;
-                // $scope.$apply(function(){
-                //   alert(data.data);
-                //   $scope.result.content = data.data;
-                // });
-              }else{
-                $scope.result.error = 'Your Command [ ' + $scope.command.text + ' ] May Error~ Plz Check It Out Again~';
-              }
-            }else{
-              $scope.result.error = data.statusText;
-            }
-
-          }).catch(function(err){
-            $scope.result.error = err;
-          })
-        };
-        //alert('ok');
+      $().ready(function(){
+        $("#command-execute").click(function(){
+          $.ajax({
+            url:'/execute',
+            type:'POST',
+            contentType:"application/json;charset=UTF-8",
+            data:JSON.stringify({"command":$('#command-text').val()}),
+            dataType:'json'
+          }).done(function(data){
+            $("#result").text(data.data).show();
+          }).fail(function(err){
+            console.log(err);
+            $("#error").text(err).show();
+          });
+        })
       });
-
     </script>
   </body>
 </html>
