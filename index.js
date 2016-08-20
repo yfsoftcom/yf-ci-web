@@ -65,7 +65,7 @@ function *execute() {
     this.body = yield runCommand(command);
   }catch(e){
     this.body = e;
-  });
+  }
 
 
 
