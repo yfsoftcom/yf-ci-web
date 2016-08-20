@@ -63,9 +63,9 @@ function *execute() {
       command = spawn(c,arr);
     }
     this.body = yield runCommand(command);
-  }catch(function(e){
+  }catch(e){
     this.body = e;
-  })
+  });
 
 
 
