@@ -57,10 +57,11 @@
             data:JSON.stringify({"command":$('#command-text').val()}),
             dataType:'json'
           }).done(function(data){
+            console.log(data);
             $("#result").text(data.data).show();
           }).fail(function(err){
             console.log(err);
-            $("#error").text(err).show();
+            $("#error").text(JSON.stringify(err)).removeClass('hide');
           });
         })
       });
