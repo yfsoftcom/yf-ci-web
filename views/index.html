@@ -63,13 +63,13 @@
           if(!confirm('Are you sure execute command:\r\n[ ' + $scope.command.text + " ]\r\n?"))
             return false;
           $http.post('/execute',{command:$scope.command.text}).then(function(data){
-            console.log(data.data);
             if(data.status == 200){
               if(data.data != ''){
-                $scope.$apply(function(){
-                  $scope.result.content = data.data;
-                });
-
+                alert(data.data);
+                // $scope.$apply(function(){
+                //   alert(data.data);
+                //   $scope.result.content = data.data;
+                // });
               }else{
                 $scope.result.error = 'Your Command [ ' + $scope.command.text + ' ] May Error~ Plz Check It Out Again~';
               }
