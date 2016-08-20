@@ -66,9 +66,10 @@ function *execute() {
   }catch(e){
     this.body = e;
   }
-
-
-
 }
+
+process.on('uncaughtException',function (req, res, route, e) {
+  console.log(e);
+});
 
 app.listen(3000);
