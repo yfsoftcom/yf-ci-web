@@ -34,7 +34,7 @@
         <div class="panel-body">
           <div class="form-horizontal">
             <div class="form-group">
-                <label for="event-job" class="col-sm-2 control-label">Command</label>
+                <label for="command-text" class="col-sm-2 control-label">Command</label>
                 <div class="col-sm-10">
                     <textarea name="commmand" rows="3" class="form-control" id="command-text" placeholder="ex: yfci build"></textarea>
                 </div>
@@ -65,7 +65,7 @@
           }).done(function(data){
             console.log(data);
             $("#result").text(data.data).show();
-          }).fail(function(err){
+          }).error(function(err){
             alert('err');
             console.log(err);
             $("#error").text(JSON.stringify(err)).removeClass('hide');
