@@ -60,8 +60,7 @@
             url:'/execute',
             type:'POST',
             contentType:"application/json;charset=UTF-8",
-            data:JSON.stringify({"command":$('#command-text').val()}),
-            dataType:'json'
+            data:JSON.stringify({"command":$('#command-text').val()})
           }).done(function(data){
             console.log(data);
             $("#result").text(data.data).show();
