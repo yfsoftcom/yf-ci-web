@@ -6,20 +6,26 @@
     <link href="//cdn.bootcss.com/flat-ui/2.3.0/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <style>
       #container {
         width:780px;
-        margin:50px auto;
-        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+        font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
       }
-
+      @media screen and (max-device-width:400px) {
+        #container {
+          width:380px;
+          font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+        }
+        h1{font-size:1.6em;}
+      }
       a {
-      color: #00B7FF;
+        color: #00B7FF;
       }
     </style>
   </head>
   <body ng-app="ci-app">
-    <div id="container">
+    <div id="container" class="center-block">
       <h1>CI Web Console App</h1>
       <div class="panel panel-default" ng-controller="ciCtrl">
         <div class="panel-heading">
@@ -41,7 +47,7 @@
           </div>
 
           <div class="alert alert-success hide" role="alert" id="result"></div>
-          <div class="alert alert-error hide" role="alert" id="error"></div>
+          <div class="alert alert-danger hide" role="alert" id="error"></div>
         </div>
       </div>
     </div>
@@ -60,6 +66,7 @@
             console.log(data);
             $("#result").text(data.data).show();
           }).fail(function(err){
+            alert('err');
             console.log(err);
             $("#error").text(JSON.stringify(err)).removeClass('hide');
           });
