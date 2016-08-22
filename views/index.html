@@ -46,8 +46,12 @@
             </div>
           </div>
 
-          <div class="alert alert-success hide" role="alert" id="result"></div>
-          <div class="alert alert-danger hide" role="alert" id="error"></div>
+          <div class="alert alert-success hide" role="alert" id="result">
+            <pre></pre>
+          </div>
+          <div class="alert alert-danger hide" role="alert" id="error">
+            <pre></pre>
+          </div>
         </div>
       </div>
     </div>
@@ -55,6 +59,8 @@
     <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script>
       $().ready(function(){
+        var $resultContent = $("#result pre");
+        var $errorContent = $("#error pre");
         $("#command-execute").click(function(){
           $.ajax({
             url:'/execute',
@@ -62,11 +68,11 @@
             contentType:"application/json;charset=UTF-8",
             data:JSON.stringify({"command":$('#command-text').val()})
           }).done(function(data){
-            console.log(data);
-            $("#result").text(data).removeClass('hide');
+            $resultContent.html(data);
+            $("#result").removeClass('hide');
           }).error(function(err){
-            alert('err');
-            $("#error").text(JSON.stringify(err)).removeClass('hide');
+            $errorContent.html(JSON.stringify(err));
+            $("#error").removeClass('hide');
           });
         })
       });
