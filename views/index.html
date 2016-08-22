@@ -63,10 +63,9 @@
             data:JSON.stringify({"command":$('#command-text').val()})
           }).done(function(data){
             console.log(data);
-            $("#result").text(data.data).show();
+            $("#result").text(data).removeClass('hide');
           }).error(function(err){
             alert('err');
-            console.log(err);
             $("#error").text(JSON.stringify(err)).removeClass('hide');
           });
         })
