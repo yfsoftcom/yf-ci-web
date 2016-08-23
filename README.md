@@ -37,3 +37,4 @@ $ pm2 start index.js -i 1 --name yf-ci-web
 
 ### 4. Known Issues
 * windows 上无法执行cmd 的指令
+* 一些危险的linux指令没有屏蔽
