@@ -12,11 +12,9 @@
 欢迎拍砖
 
 * PC上界面如下:
-
 ![执行 free -m 命令](http://upload-images.jianshu.io/upload_images/1449977-8a6e701bba8ec1da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 * 兼容适配手机哦，不过手机上能显示的空间小，费眼~
-
 ![iphone 6 打开 执行 free -m 命令](http://upload-images.jianshu.io/upload_images/1449977-a2784585654a6734.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 1. Install
