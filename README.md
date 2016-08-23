@@ -2,9 +2,11 @@
 > 这是一个可以通过web界面来执行linux shell 的工具
 
 界面如下:
+
 ![执行 free -m 命令](http://upload-images.jianshu.io/upload_images/1449977-8a6e701bba8ec1da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 兼容适配手机哦
+
 ![iphone 6 打开 执行 free -m 命令](http://upload-images.jianshu.io/upload_images/1449977-a2784585654a6734.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 0.Overview
@@ -14,7 +16,7 @@
 凑活着用呗，嘿嘿~
 配合上自己写的一些shell脚本蛮实用的
 
-### 1.Install
+### 1. Install
 ```
 $ git clone https://github.com/yfsoftcom/yf-ci-web.git
 
@@ -23,14 +25,14 @@ $ cd yf-ci-web
 $ npm install
 ```
 
-### 2.Run
+### 2. Run
 ```
 $ npm start
 //或者使用pm2来启动
 $ pm2 start index.js -i 1 --name yf-ci-web
 ```
-### 3.Useage
+### 3. Useage
 打开 [http://[yourdomain]:3000](http://localhost:3000)
 
-### 4.Known Issues
+### 4. Known Issues
 * windows 上无法执行cmd 的指令
