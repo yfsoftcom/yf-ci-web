@@ -53,7 +53,7 @@ function *github(ctx) {
   var ref = payload.ref;
   var repository_name = payload.repository.name;
   console.log(ref + ";" + repository_name);
-  this.body = 'success1';
+  this.body = 'success2';
 }
 
 function *execute() {
