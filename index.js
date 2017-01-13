@@ -13,7 +13,6 @@ var spawn = require('child_process').spawn;
 var os = process.platform;
 
 var app = koa();
-
 app.use(logger());
 app.use(route.get('/', index));
 app.use(route.post('/execute',execute));
@@ -46,9 +45,13 @@ function *runCommand(command){
   //this.body = {status:0};
 }
 
-function *github() {
+function *github(ctx) {
   var args = yield parse(this);
-  console.log(args);
+
+  var payload = JSON.parse(eval(args.payload));
+  var ref = payload.ref;
+  var repository_name = payload.repository.name;
+  console.log(ref + ";" + repository_name);
   this.body = 'success';
 }
 
