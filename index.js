@@ -17,6 +17,7 @@ var app = koa();
 app.use(logger());
 app.use(route.get('/', index));
 app.use(route.post('/execute',execute));
+app.use(route.post('/github',github));
 
 // app.use(route.post('/', index));
 
@@ -45,8 +46,16 @@ function *runCommand(command){
   //this.body = {status:0};
 }
 
+function *github() {
+  var args = yield parse(this);
+  console.log(args);
+  this.body = 'success';
+}
+
 function *execute() {
   var args = yield parse(this);
+  console.log(args);
+
   console.log('execute：' + args.command);
   var commandText = args.command;
   var arr = commandText.split(' ');
@@ -72,4 +81,4 @@ process.on('uncaughtException',function (req, res, route, e) {
   console.log(e);
 });
 
-app.listen(3000);
+app.listen(8002);
