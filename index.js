@@ -47,7 +47,6 @@ function *runCommand(command){
 
 function *github(ctx) {
   var args = yield parse(this);
-
   var payload = JSON.parse(eval(args.payload));
   var ref = payload.ref;
   var repository_name = payload.repository.name;
