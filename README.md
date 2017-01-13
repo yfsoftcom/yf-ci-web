@@ -33,7 +33,7 @@ $ npm start
 $ pm2 start index.js -i 1 --name yf-ci-web
 ```
 ### 3. Useage
-打开 [http://[yourdomain]:3000](http://localhost:3000)
+打开 [http://[yourdomain]:8002](http://localhost:8002)
 
 ### 4. Known Issues
 * windows 上无法执行cmd 的指令
